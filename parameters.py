@@ -28,7 +28,7 @@ def parse():
     parser.add_argument('--law_article_content_name', type=str, default='article_dict.txt')
     parser.add_argument('--law_article_qhj_dict_name', type=str, default='law_qhj_dict.json')
 
-    parser.add_argument('--embedding_dim', dest='embedding_dim', type=int, default=768)  #
+    parser.add_argument('--embedding_dim', dest='embedding_dim', type=int, default=768)
     parser.add_argument('--filters_num', dest='filters_num', type=int, default=128)
     parser.add_argument('--kernel_size_1', dest='kernel_size_1', type=int, default=2)
     parser.add_argument('--kernel_size_2', dest='kernel_size_2', type=int, default=4)
@@ -38,6 +38,9 @@ def parse():
     parser.add_argument('--batch_size', dest='batch_size', type=int, default=16)
     parser.add_argument('--negative_multiple', dest='negative_multiple', type=int, default=12)
     parser.add_argument('--earlystop_patience', dest='earlystop_patience', type=int, default=10)
+
+    # test check
+    parser.add_argument('--txt_name', dest='txt_name', type=str, default='001')
 
     args = parser.parse_args()
 

@@ -1,0 +1,8 @@
+numpy==1.21.2
+torch~=1.11.0+cu113
+transformers~=4.17.0
+tqdm~=4.49.0
+sklearn==0.0
+scikit-learn~=0.24.1
+jieba==0.42.1
+Flask~=2.1.1

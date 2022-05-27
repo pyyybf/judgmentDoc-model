@@ -41,6 +41,7 @@ def parse():
 
     # test check
     parser.add_argument('--txt_name', dest='txt_name', type=str, default='001')
+    parser.add_argument('--test_all', action='store_true')
 
     args = parser.parse_args()
 

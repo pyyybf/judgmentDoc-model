@@ -10,7 +10,7 @@ Model of judgment documents reasoning evaluation system.
     python mian.py
     ```
 
-- Train model with BERT
+- Train model with ALBERT
     ```text
     python train_model.py --crime hurt --negative_multiple 5 --embedding_dim 768 --batch_size 16 --epochs 10 --earlystop_patience 3
     ```
@@ -22,7 +22,7 @@ Model of judgment documents reasoning evaluation system.
 
 - Test checking batch judgment documents
     ```text
-    python check_tools.py
+    python test_check.py --test_all
     ```
 
 ## Citation

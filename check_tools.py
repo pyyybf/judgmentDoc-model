@@ -7,7 +7,6 @@
 
 import json
 import re
-import os
 
 from transformers import BertTokenizer
 
@@ -157,7 +156,7 @@ def predict_fact_map(ajjbqk_paragraphs, crime):
 def get_article_map(cpfxgc_paragraphs):
     article_map = []
     for cpfxgc_paragraph in cpfxgc_paragraphs:
-        cur_number = ''  # 条数
+        cur_number = ''  # 条目
         for i in range(len(cpfxgc_paragraph)):
             if cpfxgc_paragraph[i] == '《':
                 cur_law = ''
@@ -405,16 +404,3 @@ def print_res_count(res):
 
 def print_json(data):
     print(json.dumps(data, sort_keys=True, indent=4, separators=(', ', ': '), ensure_ascii=False))
-
-
-if __name__ == '__main__':
-    for crime in ['traffic', 'hurt']:
-        for txt_name in os.listdir('./test_txt/{0}'.format(crime)):
-            print('{0}/{1}: '.format(crime, txt_name), end='')
-            try:
-                with open('./test_txt/{0}/{1}'.format(crime, txt_name), 'r', encoding='utf-8') as test_text:
-                    check_res = check(test_text.read(), crime)
-                    print_res_count(check_res)
-                    test_text.close()
-            except:
-                print('  -----ERROR')

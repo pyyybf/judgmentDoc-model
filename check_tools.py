@@ -47,6 +47,22 @@ with open('./dict/article_sqlId_dict.json', 'r', encoding='utf-8') as article_sq
     article_sqlId_dict_json.close()
 ARTICLE_SQLID_DICT_KEYS = ARTICLE_SQLID_DICT.keys()
 
+# 加载模型
+args = parse()
+device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
+tokenizer = BertTokenizer.from_pretrained(args.tokenizer_name)
+
+model_traffic = ThreeLayers(args)
+model_traffic = model_traffic.to(device)
+model_traffic.load_state_dict(torch.load("./checkpoints/traffic/ThreeLayers", map_location=torch.device(device)))
+
+model_hurt = ThreeLayers(args)
+model_hurt = model_hurt.to(device)
+model_hurt.load_state_dict(torch.load("./checkpoints/hurt/ThreeLayers", map_location=torch.device(device)))
+
+# 加载文本处理数据
+article_dict = get_article_dict(args)
+
 
 def split_paragraph(paragraphs):
     dsr_paragraphs, ssjl_paragraphs, ajjbqk_paragraphs, cpfxgc_paragraphs, pjjg_paragraphs = [], [], [], [], []
@@ -112,17 +128,7 @@ def predict_fact_map(ajjbqk_paragraphs, crime):
         if not full_stop:  # 原文非句号结尾，去掉补充的句号
             fact_map[-1]['sentence'] = fact_map[-1]['sentence'][:-1]
 
-    # 加载模型
-    args = parse()
-    model = ThreeLayers(args)
-    device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
-    model = model.to(device)
-    model.load_state_dict(
-        torch.load("./checkpoints/{0}/ThreeLayers".format(crime), map_location=torch.device(device)))
-    tokenizer = BertTokenizer.from_pretrained(args.pretrain_model_name)
-
-    # 加载文本处理数据
-    article_dict = get_article_dict(args)
+    model = model_traffic if crime == 'traffic' else model_hurt
 
     # 开始预测每句事实所需法条
     for fact_item in fact_map:

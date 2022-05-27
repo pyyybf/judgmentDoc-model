@@ -27,7 +27,6 @@ def parse():
     parser.add_argument('--valid_recommendation_corpus_name', type=str, default='valid_data.txt')
     parser.add_argument('--test_recommendation_corpus_name', type=str, default='test_data.txt')
     parser.add_argument('--law_article_content_name', type=str, default='article_dict.txt')
-    parser.add_argument('--law_article_qhj_dict_name', type=str, default='law_qhj_dict.json')
 
     parser.add_argument('--embedding_dim', dest='embedding_dim', type=int, default=312)
     parser.add_argument('--filters_num', dest='filters_num', type=int, default=128)

@@ -26,12 +26,11 @@ class MyDataset(Dataset):
 
         for item in tqdm(data):
             fact, article_idx, label = item
-            fact = tokenizer(fact, return_tensors='pt', padding='max_length',
-                             truncation=True, max_length=fact_len + 2)
+            fact = tokenizer(fact, return_tensors='pt', padding='max_length', truncation=True, max_length=fact_len + 2)
 
             article = article_dict[article_idx]
-            article = tokenizer(article, return_tensors='pt', padding='max_length',
-                                truncation=True, max_length=article_len + 2)
+            article = tokenizer(article, return_tensors='pt', padding='max_length', truncation=True,
+                                max_length=article_len + 2)
             article['input_ids'] = torch.cat(
                 [torch.full([article['input_ids'].size(0), 1], 2), article['input_ids'][:, 1:]], dim=-1)
 
@@ -50,7 +49,7 @@ class MyDataset(Dataset):
 
 def train_model(model, args, train_data, valid_data, test_data, article_dict):
     device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
-    tokenizer = BertTokenizer.from_pretrained(args.pretrain_model_name)
+    tokenizer = BertTokenizer.from_pretrained(args.tokenizer_name)
 
     train_pos, train_neg = train_data
     valid_pos, valid_neg = valid_data

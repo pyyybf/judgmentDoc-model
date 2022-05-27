@@ -16,7 +16,8 @@ def parse():
     parser.add_argument('--fact_len', dest='fact_len', type=int, default=50)
     parser.add_argument('--article_len', dest='article_len', type=int, default=50)
     parser.add_argument('--model_name', type=str, default='ThreeLayers')
-    parser.add_argument('--pretrain_model_name', type=str, default='hfl/chinese-bert-wwm-ext')
+    parser.add_argument('--pretrain_model_name', type=str, default='clue/albert_chinese_tiny')
+    parser.add_argument('--tokenizer_name', type=str, default='clue/albert_chinese_tiny')
 
     parser.add_argument('--data_dir', type=str, default='./data/')
     parser.add_argument('--checkpoint_dir', type=str, default='./checkpoints/')
@@ -28,7 +29,7 @@ def parse():
     parser.add_argument('--law_article_content_name', type=str, default='article_dict.txt')
     parser.add_argument('--law_article_qhj_dict_name', type=str, default='law_qhj_dict.json')
 
-    parser.add_argument('--embedding_dim', dest='embedding_dim', type=int, default=768)
+    parser.add_argument('--embedding_dim', dest='embedding_dim', type=int, default=312)
     parser.add_argument('--filters_num', dest='filters_num', type=int, default=128)
     parser.add_argument('--kernel_size_1', dest='kernel_size_1', type=int, default=2)
     parser.add_argument('--kernel_size_2', dest='kernel_size_2', type=int, default=4)

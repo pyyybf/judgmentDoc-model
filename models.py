@@ -8,13 +8,13 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from transformers import BertModel
+from transformers import AlbertModel
 
 
 class ThreeLayers(nn.Module):
     def __init__(self, args):
         super(ThreeLayers, self).__init__()
-        self.embedding = BertModel.from_pretrained(args.pretrain_model_name)
+        self.embedding = AlbertModel.from_pretrained(args.pretrain_model_name)
         self.fact_convs = nn.ModuleList([
             nn.Conv1d(args.embedding_dim, args.filters_num, args.kernel_size_1),
             nn.Conv1d(args.filters_num, args.filters_num, args.kernel_size_2)
@@ -45,8 +45,8 @@ class ThreeLayers(nn.Module):
         fact = embeddings[:, :length, :]
         article = embeddings[:, length:, :]
 
-        fact = fact * fact_am.unsqueeze(dim=-1).repeat(1, 1, 768)
-        article = article * article_am.unsqueeze(dim=-1).repeat(1, 1, 768)
+        fact = fact * fact_am.unsqueeze(dim=-1).repeat(1, 1, 312)
+        article = article * article_am.unsqueeze(dim=-1).repeat(1, 1, 312)
 
         fact, article = fact[:, 1:-1, :], article[:, 1:-1, :]
 
